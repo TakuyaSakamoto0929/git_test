@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ユーザー編集画面</title>
+</head>
+<body>
+	<h3>ユーザー編集画面</h3>
+	  <form th:action="@{/user/update}" th:object="${userRequest}" method="post">
+		
+	    <label for="name">名前:</label>
+	    <input type="text" th:field="*{name}">
+		<br>
+		<label for="email">メールアドレス:</label>
+		<input type="text" th:field="*{email}">
+		<br>
+		<label for="age">年齢:</label>
+		<input type="text" th:field="*{age}">
+		<br>
+	    <button>更新</button>
+	    <br>
+		<input type="hidden" th:field="*{id}" />
+
+	  </form>
+	  
+	  <div th:if="${validationError}" th:each="error : ${validationError}">
+	    <label style="color: red" th:text="${error}"></label>
+	  </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>comment編集画面</title>
+</head>
+<body>
+	<h3>コメント編集画面</h3>
+	  <form th:action="@{/comment/update}" th:object="${commentRequest}" method="post">
+		
+	    <label for="content">コメント:</label>
+	    <input type="text" th:field="*{comment}">
+		
+	    <button>更新</button>
+	    <br>
+		<input type="hidden" th:field="*{id}" />
+
+	  </form>
+	  
+	  <div th:if="${validationError}" th:each="error : ${validationError}">
+	    <label style="color: red" th:text="${error}"></label>
+	  </div>
+</body>
+</html>

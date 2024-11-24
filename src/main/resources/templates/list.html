@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>一言コメント</h3>
+	  <form th:action="@{/comment/add}" th:object="${comment}" method="post">
+	    <label for="content">コメント:</label>
+	    <input type="text" th:field="*{content}">
+	    <button>登録</button>
+	    <br>
+	    <small style="color: red" th:errors="*{content}"></small>
+	  </form>
+
+	  <br>
+	  <h3>一覧</h3>
+	  <div th:each="comment : ${comments}">
+	    <div>[[${comment.id}]] - [[${comment.content}]]</div>
+			<a th:href="@{/comment/{id}/edit(id=*{comment.id})}">編集</a>
+			<a th:href="@{/comment/{id}/delete(id=*{comment.id})}">削除</a>
+	  </div>
+</body>
+</html>

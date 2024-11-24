@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ユーザー一覧</title>
+</head>
+<body>
+	<h3>ユーザー登録</h3>
+	
+	  <form th:action="@{/user/add}" th:object="${user}" method="post">
+	    
+		<label for="name">ユーザー名:</label>
+	    <input type="text" th:field="*{name}">
+		<br>
+		<label for="email">メールアドレス:</label>
+		<input type="text" th:field="*{email}">
+		<br>
+		<label for="age">年齢:</label>
+		<input type="text" th:field="*{age}">
+		<br>
+	    <button>登録</button>
+	    <br>
+	    <small style="color: red" th:errors="*{name}"></small>
+		<small style="color: red" th:errors="*{email}"></small>
+		<small style="color: red" th:errors="*{age}"></small>
+
+	  </form>
+
+	  <br>
+	  <h3>ユーザー一覧</h3>
+	  <table border="1">
+	      <thead>
+	          <tr>
+	              <th>ID</th>
+	              <th>Name</th>
+	              <th>Email</th>
+	              <th>Age</th>
+				  <th>編集</th>
+				  <th>削除</th>
+	          </tr>
+	      </thead>
+	      <tbody>
+			<!--コントローラから渡された値をループで出力-->  
+	          <tr th:each="user : ${users}">
+	              <td th:text="${user.id}"></td>
+	              <td th:text="${user.name}"></td>
+	              <td th:text="${user.email}"></td>
+	              <td th:text="${user.age}"></td>
+				  <td><a th:href="@{/user/{id}/edit(id=*{user.id})}">編集</a></td>
+				  <td><a th:href="@{/user/{id}/delete(id=*{user.id})}">削除</a></td>
+	          </tr>
+	      </tbody>
+	  </table>
+</body>
+</html>

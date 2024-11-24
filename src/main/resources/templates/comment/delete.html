@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>コメント削除確認画面</title>
+</head>
+<body>
+	<h3>コメント削除確認画面</h3>
+	  <form th:action="@{/comment/delete}" th:object="${commentRequest}" method="post">
+		<p>以下の内容を削除しますか？</p>
+<!--		th:inline⇒タグで囲むと、その内部では［［］］で値にアクセスできる。-->
+		<div th:inline="text">
+			<label for="comment"  th:inline="text">コメント:</label>
+			<span>[[*{comment}]]<span>			
+		</div>
+		<br>
+	    <button>削除</button>
+	    <br>
+		
+<!--		隠し項目-->
+		<input type="hidden" th:field="*{id}" />
+		<input type="hidden" th:field="*{comment}" />
+
+	  </form>
+	  
+	  <div th:if="${validationError}" th:each="error : ${validationError}">
+	    <label style="color: red" th:text="${error}"></label>
+	  </div>
+</body>
+</html>
